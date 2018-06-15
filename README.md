@@ -365,7 +365,10 @@ transfer between wallets
 
 Example to debit £20 from wallet id=1 and credit wallet id = 3
 
+First lets retrieve each wallet to see balance before (wallet 1 balance = £100, wallet 3 balance = £300)
+
 curl -v localhost:8081/wallet/1
+
 ```log
 {
 "id": 1,
@@ -376,6 +379,7 @@ curl -v localhost:8081/wallet/1
 }
 ```
 curl -v localhost:8081/wallet/3
+```log
 {
 "id": 3,
 "custId": 2,
@@ -383,11 +387,12 @@ curl -v localhost:8081/wallet/3
 "currency": "GBP",
 "balance": 300
 }
-
+```
 	Do transfer:
 
 	curl --request PATCH localhost:8081/transfer/debit/1/credit/3?amount=20
 
+You can see the balances are updated appropriately (wallet 1 balance is now £80, wallet 3 balance is now £320)
 ```log
 [
    {
