@@ -1,0 +1,5 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/Users/tomreilly/IdeaProjects/revolut-test/src/main/resources/log4j2.xml,/Users/tomreilly/IdeaProjects/revolut-test/target/scala-2.11/classes/log4j2.xml)[0m
+[0m[[0mdebug[0m] [0m	(/Users/tomreilly/IdeaProjects/revolut-test/src/main/resources/application.conf,/Users/tomreilly/IdeaProjects/revolut-test/target/scala-2.11/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/Users/tomreilly/IdeaProjects/revolut-test/src/main/resources/sql,/Users/tomreilly/IdeaProjects/revolut-test/target/scala-2.11/classes/sql)[0m
+[0m[[0mdebug[0m] [0m	(/Users/tomreilly/IdeaProjects/revolut-test/src/main/resources/sql/h2_revolut_test_schema.sql,/Users/tomreilly/IdeaProjects/revolut-test/target/scala-2.11/classes/sql/h2_revolut_test_schema.sql)[0m

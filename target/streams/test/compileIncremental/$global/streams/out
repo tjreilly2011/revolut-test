@@ -1,0 +1,29 @@
+[0m[[0mdebug[0m] [0m[naha] The com.tomre.revolut.services.RevolutService source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	wallets, id830966402, id107035103, id1993814709, walletById, id1954069618, id390749326, id1868106193, id593292895, walletTrans, id1153647613, walletTransById, id12450248, id2129524086, id1306935621, customers, id1830375925, custById.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Files invalidated by inheriting from (external) com.tomre.revolut.services.RevolutService: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0m[naha] Getting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0m[naha] Getting sources that directly depend on (external) com.tomre.revolut.services.RevolutService.[0m
+[0m[[0mdebug[0m] [0m[naha] None of the modified names appears in /Users/tomreilly/IdeaProjects/revolut-test/src/test/scala/com/tomre/revolut/RevolutServiceTest.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0m[naha] The com.tomre.revolut.repository.RevolutRepository source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	wallets, id830966402, id107035103, id1993814709, walletById, id1954069618, id390749326, id1868106193, id593292895, walletTrans, id1153647613, walletTransById, id12450248, id2129524086, id1306935621, customers, id1830375925, custById.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Files invalidated by inheriting from (external) com.tomre.revolut.repository.RevolutRepository: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0m[naha] Getting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0m[naha] Getting sources that directly depend on (external) com.tomre.revolut.repository.RevolutRepository.[0m
+[0m[[0mdebug[0m] [0m[naha] None of the modified names appears in /Users/tomreilly/IdeaProjects/revolut-test/src/test/scala/com/tomre/revolut/RevolutServiceTest.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0m[naha] [0m
+[0m[[0mdebug[0m] [0m[naha] Initial source changes: [0m
+[0m[[0mdebug[0m] [0m[naha] 	removed:Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	added: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	modified: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated products: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] External API changes: API Changes: Set(NamesChange(com.tomre.revolut.services.RevolutService,ModifiedNames(regularNames = wallets, id830966402, id107035103, id1993814709, walletById, id1954069618, id390749326, id1868106193, id593292895, walletTrans, id1153647613, walletTransById, id12450248, id2129524086, id1306935621, customers, id1830375925, custById, implicitNames = )), NamesChange(com.tomre.revolut.repository.RevolutRepository,ModifiedNames(regularNames = wallets, id830966402, id107035103, id1993814709, walletById, id1954069618, id390749326, id1868106193, id593292895, walletTrans, id1153647613, walletTransById, id12450248, id2129524086, id1306935621, customers, id1830375925, custById, implicitNames = )))[0m
+[0m[[0mdebug[0m] [0m[naha] Modified binary dependencies: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] [0m
+[0m[[0mdebug[0m] [0m[naha] Sources indirectly invalidated by:[0m
+[0m[[0mdebug[0m] [0m[naha] 	product: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	binary dep: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	external source: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set()[0m
