@@ -361,7 +361,7 @@ all customer wallet transactions
 ]
 ]
 ```
-transfer between wallets
+# Transfer between wallets
 
 Example to debit £20 from wallet id=1 and credit wallet id = 3
 
