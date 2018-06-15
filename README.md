@@ -407,7 +407,7 @@ curl -v localhost:8081/wallet/3
 	curl --request PATCH localhost:8081/transfer/debit/1/credit/3?amount=20
 
 You can see the balances are updated appropriately (wallet 1 balance is now £80, wallet 3 balance is now £320)
-and a trasnaction record was created noting the details (ids of debited/credited wallets, amount and timestamp)
+and a transaction record was created with the relevant debited/credited wallet ids, amount and timestamp.
 ```log
 [
    {
