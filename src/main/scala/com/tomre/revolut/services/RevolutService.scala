@@ -9,7 +9,7 @@ import com.twitter.util.Future
 class RevolutService(val ctx: RevolutDatabaseContext) extends RevolutRepository {
 
   def loadDataIntoDb() = {
-    loadTestData
+    loadTestData()
   }
 
   def getCustomers = {
