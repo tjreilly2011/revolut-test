@@ -258,8 +258,6 @@ trait RevolutRepository extends Repository {
 
   def transferMoney(currency: String, debitWalletId: Long, creditWalletId: Long, amount: BigDecimal) = {
 
-    var txId = 0L
-
     if (debitWalletId == creditWalletId)
       throw new TransferException("Transfer to/from same account not allowed!")
 
