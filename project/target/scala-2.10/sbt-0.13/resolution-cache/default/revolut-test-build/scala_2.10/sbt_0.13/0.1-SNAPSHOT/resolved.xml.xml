@@ -4,7 +4,7 @@
 		module="revolut-test-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20180613121610"
+		publication="20180615140738"
 		e:sbtVersion="0.13" e:scalaVersion="2.10"
 	>
 		<description>
