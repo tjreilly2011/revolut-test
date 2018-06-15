@@ -1,4 +1,4 @@
-# RevolutTest
+# Revolut Test App
 
 Used following libs etc for this project:
 * Scala 2.11.12
