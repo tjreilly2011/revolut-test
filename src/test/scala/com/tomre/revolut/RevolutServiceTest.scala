@@ -1,9 +1,7 @@
 package com.tomre.revolut
 
-import java.time.Instant
-
 import org.slf4j.LoggerFactory
-import com.tomre.revolut.models.{Currency, Customer, Wallet, WalletTrans}
+import com.tomre.revolut.models.{Currency, Customer}
 import com.tomre.revolut.services.RevolutService
 import com.tomre.revolut.utils.TransferException
 import com.twitter.util.Await
@@ -15,57 +13,10 @@ class RevolutServiceTest extends FunSuite with BeforeAndAfterAll {
 
   val logger = LoggerFactory.getLogger("com.tomre.revolut.RevolutServiceTest")
 
-  import ctx._
-
   val custServ = new RevolutService(ctx)
 
   // Load test data
   custServ.loadTestData()
-
-//  val listCustomers = List(
-//    Customer(1L, "treilly", "Tom", "Reilly", 2),
-//    Customer(2L, "jsoap", "Joe", "Soap", 3),
-//    Customer(3L, "bnomates", "Billy", "Nomates", 4)
-//  )
-//
-//  val insertCustomerList = quote {
-//    liftQuery(listCustomers).foreach(e => query[Customer].insert(e))
-//  }
-//
-//  val listWallets = List(
-//    Wallet(1L, 1L, "treilly_gbp_wallet", Currency.GBP.toString, BigDecimal("100.00")),
-//    Wallet(2L, 1L, "treilly_eur_wallet", Currency.EUR.toString, BigDecimal("200.00")),
-//    Wallet(3L, 2L, "jsoap_gbp_wallet", Currency.GBP.toString, BigDecimal("300.00")),
-//    Wallet(4L, 3L, "bnomates_gbp_wallet", Currency.GBP.toString, BigDecimal("400.00"))
-//  )
-//
-//  val insertWalletList = quote {
-//    liftQuery(listWallets).foreach(e => query[Wallet].insert(e))
-//  }
-//
-//  val listWalletTrans = List(
-//    WalletTrans(1L, 1L, 4L, BigDecimal("100"), Instant.now()),
-//    WalletTrans(2L, 3L, 1L, BigDecimal("50"), Instant.now()),
-//    WalletTrans(3L, 3L, 1L, BigDecimal("50"), Instant.now()),
-//    WalletTrans(4L, 1L, 3L, BigDecimal("50"), Instant.now())
-//  )
-//
-//  val insertWalletTrans = quote {
-//    liftQuery(listWalletTrans).foreach(e => query[WalletTrans].insert(e))
-//  }
-//
-//  val custServ = new RevolutService(ctx)
-//
-//  override def beforeAll = {
-//    testContext.transaction {
-//      testContext.run(insertCustomerList)
-//      testContext.run(insertWalletList)
-//      testContext.run(insertWalletTrans)
-//    }
-//    ()
-//
-//    logger.info("###### Finished adding test data to database... #####")
-//  }
 
   test("Get All Customers") {
 
@@ -250,10 +201,10 @@ class RevolutServiceTest extends FunSuite with BeforeAndAfterAll {
     val creditWalletId = 3L
     val amount = BigDecimal("10")
 
-    val txId = Await.result(custServ.transfer(currency, debitWalletId, creditWalletId, amount))
-    logger.info("transaction id is: " + txId)
+    val credDebWallAndTx = Await.result(custServ.transfer(currency, debitWalletId, creditWalletId, amount))
+    logger.info("transaction id is: " + credDebWallAndTx._3.id)
 
-    val newWalletTx = Await.result(custServ.getCustomerWalletTransById(txId))
+    val newWalletTx = Await.result(custServ.getCustomerWalletTransById(credDebWallAndTx._3.id))
 
     assert(newWalletTx.id > 0)
     assert(newWalletTx.amount == 10L)

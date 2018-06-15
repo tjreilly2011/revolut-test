@@ -10,9 +10,7 @@ lazy val circeVersion = "0.9.0"
 lazy val catsVersion = "1.1.0"
 lazy val twitterServerVersion = "18.5.0"
 lazy val finagleVersion = "18.5.0"
-
 lazy val scalaTestVersion = "3.0.5"
-//lazy val mockitoTestVersion = "1.10.19"
 
 lazy val commonSettings = Seq(
   version := "1.0",
@@ -34,7 +32,6 @@ lazy val commonSettings = Seq(
     , "-Ywarn-numeric-widen"
     , "-Ywarn-value-discard"
     , "-Xfuture"
-    //    , "-Xlog-implicits"
   ),
   javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint"),
   javaOptions ++= Seq("-Xmx1G","-Dquill.binds.log=true"),
@@ -49,8 +46,6 @@ lazy val root = (project in file("."))
       "org.slf4j" % "slf4j-api" % slfjVersion,
       "ch.qos.logback" % "logback-classic" % logbackVersion,
       "com.twitter" %% "twitter-server-logback-classic" % twitterServerLogBackClassic,
-//      "org.apache.logging.log4j" % "log4j-api" % log4j2Version,
-//      "org.apache.logging.log4j" % "log4j-core" % log4j2Version,
       "io.getquill" %% "quill-jdbc" % quillVersion,
       "com.github.finagle" %% "finch-core" % finchVersion,
       "com.github.finagle" %% "finch-circe" % finchVersion,
@@ -62,11 +57,6 @@ lazy val root = (project in file("."))
       "org.scalactic" %% "scalactic" % scalaTestVersion,
       "org.scalatest" %% "scalatest" % scalaTestVersion % "test"
     ),
-      //.map(_.exclude("org.slf4j", "*")),
-//      .map(_.exclude("org.slf4j", "slfj-nop-1.6.4")),
-//    excludeDependencies ++= Seq(
-//      "org.apache.logging.log4j" % "log4j-slf4j-impl"
-//    ),
     // set the main class for 'sbt run'
     mainClass in (Compile, run) := Some("com.tomre.revolut.RevolutTestAppServer")
   )

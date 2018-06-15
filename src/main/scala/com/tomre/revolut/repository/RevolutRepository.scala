@@ -6,17 +6,17 @@ import java.time.Instant
 import com.tomre.revolut.utils.TransferException
 import org.slf4j.LoggerFactory
 
-trait RevolutRepository extends Repository  {
+trait RevolutRepository extends Repository {
 
-import ctx._
+  import ctx._
 
   val logger = LoggerFactory.getLogger("com.tomre.revolut.repository.RevolutRepository")
 
-	val customers = quote(query[Customer])
-	val wallets = quote(query[Wallet])
-	val walletTrans = quote(query[WalletTrans])
+  val customers = quote(query[Customer])
+  val wallets = quote(query[Wallet])
+  val walletTrans = quote(query[WalletTrans])
 
-	def loadTestData() = {
+  def loadTestData() = {
 
     val listCustomers = List(
       Customer(1L, "treilly", "Tom", "Reilly", 2),
@@ -59,7 +59,7 @@ import ctx._
 
     logger.info("Finished adding test customer, wallet and transaction data to database.")
     getAllWalletTxs.foreach(println(_))
-	}
+  }
 
   def getAllCusts = {
     val q = quote {
@@ -94,47 +94,47 @@ import ctx._
     ctx.run(q)
   }
 
-	def custById = quote {
-		(id: Long) => customers.filter(_.id == id)
-	}
+  def custById = quote {
+    (id: Long) => customers.filter(_.id == id)
+  }
 
-	def walletById = quote {
-		(id: Long) => wallets.filter(_.id == id)
-	}
+  def walletById = quote {
+    (id: Long) => wallets.filter(_.id == id)
+  }
 
-	def walletTransById = quote {
-		(id: Long) => walletTrans.filter(_.id == id)
-	}
+  def walletTransById = quote {
+    (id: Long) => walletTrans.filter(_.id == id)
+  }
 
-  def getCustById(id:Long) = {
+  def getCustById(id: Long) = {
 
     ctx.run(custById(lift(id))).head
   }
 
-  def getWallById(id:Long) = {
+  def getWallById(id: Long) = {
     ctx.run(walletById(lift(id))).head
   }
 
-  def getWallTxById(id:Long) = {
+  def getWallTxById(id: Long) = {
     ctx.run(walletTransById(lift(id))).head
   }
 
-	def createCust(customer: Customer) = {
+  def createCust(customer: Customer) = {
 
-		val customerInsert = quote {
-			(c: Customer) => customers.insert(c).returning(_.id)
-		}
+    val customerInsert = quote {
+      (c: Customer) => customers.insert(c).returning(_.id)
+    }
 
-		val inserted = ctx.run(customerInsert(lift(customer)))
-		ctx.run(custById(lift(inserted))).head
-	}
+    val inserted = ctx.run(customerInsert(lift(customer)))
+    ctx.run(custById(lift(inserted))).head
+  }
 
-  def getCustWalletById(custId:Long,walletId:Long) = {
+  def getCustWalletById(custId: Long, walletId: Long) = {
 
     val q = quote {
       for {
-        c <- customers if(c.id == lift(custId))
-        w <- wallets.filter(_.id == lift(walletId)) if(c.id == w.custId)
+        c <- customers if (c.id == lift(custId))
+        w <- wallets.filter(_.id == lift(walletId)) if (c.id == w.custId)
       } yield {
         (c, w)
       }
@@ -143,13 +143,13 @@ import ctx._
     ctx.run(q)
   }
 
-  def getCustWalletTxById(custId:Long,walletId:Long,walletTxId:Long) = {
+  def getCustWalletTxById(custId: Long, walletId: Long, walletTxId: Long) = {
 
     val q = quote {
       for {
-        c <- customers if(c.id == lift(custId))
-        w <- wallets.filter(_.id == lift(walletId)) if(c.id == w.custId)
-        wtx <- walletTrans.filter(_.id == lift(walletTxId)) if(w.id == wtx.walletIdToCredit || w.id == wtx.walletIdToDebit)
+        c <- customers if (c.id == lift(custId))
+        w <- wallets.filter(_.id == lift(walletId)) if (c.id == w.custId)
+        wtx <- walletTrans.filter(_.id == lift(walletTxId)) if (w.id == wtx.walletIdToCredit || w.id == wtx.walletIdToDebit)
       } yield {
         (c, w, wtx)
       }
@@ -158,13 +158,13 @@ import ctx._
     ctx.run(q)
   }
 
-  def getCustWalletTxs(custId:Long,walletId:Long) = {
+  def getCustWalletTxs(custId: Long, walletId: Long) = {
 
     val q = quote {
       for {
-        c <- customers if(c.id == lift(custId))
-        w <- wallets.filter(_.id == lift(walletId)) if(c.id == w.custId)
-        wtx <- walletTrans if(w.id == wtx.walletIdToCredit || w.id == wtx.walletIdToDebit)
+        c <- customers if (c.id == lift(custId))
+        w <- wallets.filter(_.id == lift(walletId)) if (c.id == w.custId)
+        wtx <- walletTrans if (w.id == wtx.walletIdToCredit || w.id == wtx.walletIdToDebit)
       } yield {
         (c, w, wtx)
       }
@@ -173,122 +173,122 @@ import ctx._
     ctx.run(q)
   }
 
-	def createWalletTrans(wtx: WalletTrans) = {
+  def createWalletTrans(wtx: WalletTrans) = {
 
-		val walletTransInsert = quote {
-			(wt: WalletTrans) => walletTrans.insert(wt).returning(_.id)
-		}
+    val walletTransInsert = quote {
+      (wt: WalletTrans) => walletTrans.insert(wt).returning(_.id)
+    }
 
-		val inserted = ctx.run(walletTransInsert(lift(wtx)))
-		ctx.run(walletTransById(lift(inserted))).head
-	}
+    val inserted = ctx.run(walletTransInsert(lift(wtx)))
+    ctx.run(walletTransById(lift(inserted))).head
+  }
 
-	def getAllCustsAndWallets = {
-		val q = quote {
-			for {
-				(c,w) <- customers.join(wallets).on((c, w) => c.id ==w.custId)
-			} yield {
-				(c,w)
-			}
-		}
-		ctx.run(q)
-	}
+  def getAllCustsAndWallets = {
+    val q = quote {
+      for {
+        (c, w) <- customers.join(wallets).on((c, w) => c.id == w.custId)
+      } yield {
+        (c, w)
+      }
+    }
+    ctx.run(q)
+  }
 
-	def getCustWallets(custId:Long) = {
-		val q = quote {
-			for {
-				(c,w) <- customers.filter(_.id == lift(custId)).join(wallets).on((c, w) => c.id ==w.custId)
-			} yield {
-				(c,w)
-			}
-		}
-		ctx.run(q)
-	}
+  def getCustWallets(custId: Long) = {
+    val q = quote {
+      for {
+        (c, w) <- customers.filter(_.id == lift(custId)).join(wallets).on((c, w) => c.id == w.custId)
+      } yield {
+        (c, w)
+      }
+    }
+    ctx.run(q)
+  }
 
-  	def getAllCustsWalletsandTransactions = {
-		val q = quote {
-			for {
+  def getAllCustsWalletsandTransactions = {
+    val q = quote {
+      for {
 
         c <- customers
-        w <- wallets if(c.id == w.custId)
-        wtxs <- walletTrans if(w.id == wtxs.walletIdToCredit || w.id == wtxs.walletIdToDebit)
-			} yield {
-				(c,w,wtxs)
-			}
-		}
-		ctx.run(q)
-	}
+        w <- wallets if (c.id == w.custId)
+        wtxs <- walletTrans if (w.id == wtxs.walletIdToCredit || w.id == wtxs.walletIdToDebit)
+      } yield {
+        (c, w, wtxs)
+      }
+    }
+    ctx.run(q)
+  }
 
-	def updateCust(customer:Customer) = {
+  def updateCust(customer: Customer) = {
 
-		val custToUpdate = quote {
-			(c: Customer) => customers.filter(_.id == lift(customer.id)).update(c)
-		}
+    val custToUpdate = quote {
+      (c: Customer) => customers.filter(_.id == lift(customer.id)).update(c)
+    }
 
-		ctx.run(custToUpdate(lift(customer)))
-		ctx.run(custById(lift(customer.id))).head
+    ctx.run(custToUpdate(lift(customer)))
+    ctx.run(custById(lift(customer.id))).head
 
-	}
+  }
 
-	def updateCustBatch(listCust:List[Customer]) = {
+  def updateCustBatch(listCust: List[Customer]) = {
 
-		val customersToUpdate = quote {
-			liftQuery(listCust).foreach { customer =>
-				customers.filter(_.id == customer.id)
-  				.update(customer)
-			}
-		}
-		ctx.run(customersToUpdate)
-	}
+    val customersToUpdate = quote {
+      liftQuery(listCust).foreach { customer =>
+        customers.filter(_.id == customer.id)
+          .update(customer)
+      }
+    }
+    ctx.run(customersToUpdate)
+  }
 
-	def updateWalletBalance(wallet:Wallet,balance:BigDecimal) = {
+  def updateWalletBalance(wallet: Wallet, balance: BigDecimal) = {
 
-		val walletToUpdate = quote {
-			(w: Wallet) => wallets.filter(_.id == lift(wallet.id)).update(_.balance -> lift(balance))
-		}
+    val walletToUpdate = quote {
+      (w: Wallet) => wallets.filter(_.id == lift(wallet.id)).update(_.balance -> lift(balance))
+    }
 
-		ctx.run(walletToUpdate(lift(wallet)))
-		ctx.run(walletById(lift(wallet.id))).head
+    ctx.run(walletToUpdate(lift(wallet)))
+    ctx.run(walletById(lift(wallet.id))).head
 
-	}
+  }
 
-	def deleteCust(customer:Customer) = {
-		ctx.run(query[Customer].filter(_.id == lift(customer.id)).delete)
-	}
+  def deleteCust(customer: Customer) = {
+    ctx.run(query[Customer].filter(_.id == lift(customer.id)).delete)
+  }
 
-	def transferMoney(currency:String,debitWalletId:Long, creditWalletId:Long, amount:BigDecimal) = {
+  def transferMoney(currency: String, debitWalletId: Long, creditWalletId: Long, amount: BigDecimal) = {
 
-		var txId = 0L
+    var txId = 0L
 
-    if(debitWalletId == creditWalletId)
+    if (debitWalletId == creditWalletId)
       throw new TransferException("Transfer to/from same account not allowed!")
 
-		// The Quill async module provides transaction support based on a
+    // The Quill async module provides transaction support based on a
     // custom implicit execution context
 
     // Run the transfer steps in a transaction
 
-		ctx.transaction {
-			// get debit wallet id
-			val debWallet = getWallById(debitWalletId)
+    ctx.transaction {
+      // get debit wallet id
+      val debWallet = getWallById(debitWalletId)
 
-      if(debWallet.balance <= amount)
+      if (debWallet.balance <= amount)
         throw new TransferException("Insufficent Funds for transfer!")
 
-			// get credit wallet id
-			val credWallet = getWallById(creditWalletId)
+      // get credit wallet id
+      val credWallet = getWallById(creditWalletId)
 
-			// update debit wallet with balance subtracted
-			updateWalletBalance(debWallet,debWallet.balance - amount)
+      // update debit wallet with balance subtracted
+      updateWalletBalance(debWallet, debWallet.balance - amount)
 
-			// update credit wallet with balance added
-			updateWalletBalance(credWallet,credWallet.balance + amount)
+      // update credit wallet with balance added
+      updateWalletBalance(credWallet, credWallet.balance + amount)
 
-			// create a new tx for the the transfer and return transaction Id
-			createWalletTrans(WalletTrans(1L,credWallet.id,debWallet.id,amount,Instant.now())).id
+      // create a new tx for the the transfer and return the updated wallets and the transaction
+      (getWallById(debitWalletId),getWallById(creditWalletId),createWalletTrans(WalletTrans(1L, credWallet.id, debWallet.id, amount, Instant.now())))
 
-		}
+    }
 
-	}
+  }
 
 }

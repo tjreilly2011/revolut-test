@@ -20,6 +20,8 @@ logs/
 project/*-shim.sbt
 project/project/
 project/target/
+target/.history
 target/
 .scala_dependencies
 .worksheet
+${sys:web.root}/

@@ -24,85 +24,74 @@ class RevolutService(val ctx: RevolutDatabaseContext) extends RevolutRepository 
     Future.value(getAllWalletTxs)
   }
 
-	def getCustomerById(id:Long) = {
-		Future.value(getCustById(id))
-	}
+  def getCustomerById(id: Long) = {
+    Future.value(getCustById(id))
+  }
 
-  def getWalletById(id:Long) = {
+  def getWalletById(id: Long) = {
     Future.value(getWallById(id))
   }
 
-  def getWalletTxById(id:Long) = {
+  def getWalletTxById(id: Long) = {
     Future.value(getWallTxById(id))
   }
 
-//
-	def getCustomerWalletById(custId:Long,walletId:Long) = {
+  def getCustomerWalletById(custId: Long, walletId: Long) = {
 
-		Future.value(getCustWalletById(custId,walletId))
-	}
-
-  def getCustomerWalletTxById(custId:Long,walletId:Long,walletTxId:Long) = {
-
-    Future.value(getCustWalletTxById(custId,walletId,walletTxId))
+    Future.value(getCustWalletById(custId, walletId))
   }
 
-    def getCustomerWalletTxs(custId:Long,walletId:Long) = {
-      Future.value(getCustWalletTxs(custId:Long,walletId:Long))
-    }
+  def getCustomerWalletTxById(custId: Long, walletId: Long, walletTxId: Long) = {
 
-//
-	def getCustomerWalletTransById(id:Long) = {
-
-		Future.value(getWallTxById(id))
-	}
-
-	def createCustomer(customer: Customer) = {
-		Future.value(createCust(customer))
-	}
-
-	def getCustomersWithWallets = {
-		Future.value(getAllCustsAndWallets)
-	}
-
-  def getCustomerWallets(custId:Long) = {
-    Future.value(getCustWallets(custId:Long))
+    Future.value(getCustWalletTxById(custId, walletId, walletTxId))
   }
 
-//  def getCustomerWallet(custId:Long,walletId:Long) = {
-//    Future.value(getCustWallet(custId:Long,walletId:Long))
-//  }
-//
-//  def getCustomerTxs(custId:Long) = {
-//    Future.value(getCustTxs(custId:Long))
-//  }
+  def getCustomerWalletTxs(custId: Long, walletId: Long) = {
+    Future.value(getCustWalletTxs(custId: Long, walletId: Long))
+  }
 
+  def getCustomerWalletTransById(id: Long) = {
 
-//
-	def getCustomersWalletsAndTxs = {
-		Future.value(getAllCustsWalletsandTransactions)
-	}
+    Future.value(getWallTxById(id))
+  }
 
-	def updateCustomer(customer: Customer) = {
-		Future.value(updateCust(customer))
-	}
+  def createCustomer(customer: Customer) = {
+    Future.value(createCust(customer))
+  }
 
-	def updateCustomerBatch(customerList:List[Customer]) = {
-		Future.value(updateCustBatch(customerList))
-	}
+  def getCustomersWithWallets = {
+    Future.value(getAllCustsAndWallets)
+  }
 
-	def updateCustomerWalletBalance(wallet:Wallet,balance:BigDecimal) = {
-		Future.value(updateWalletBalance(wallet,balance))
-	}
-	def deleteCustomer(customer: Customer) = {
-		Future.value(deleteCust(customer))
-	}
+  def getCustomerWallets(custId: Long) = {
+    Future.value(getCustWallets(custId: Long))
+  }
 
-	def transfer(currency:String,debitAccId:Long, creditAccId:Long, amount:BigDecimal) = {
-		if(amount <= BigDecimal("0.00"))
+  def getCustomersWalletsAndTxs = {
+    Future.value(getAllCustsWalletsandTransactions)
+  }
+
+  def updateCustomer(customer: Customer) = {
+    Future.value(updateCust(customer))
+  }
+
+  def updateCustomerBatch(customerList: List[Customer]) = {
+    Future.value(updateCustBatch(customerList))
+  }
+
+  def updateCustomerWalletBalance(wallet: Wallet, balance: BigDecimal) = {
+    Future.value(updateWalletBalance(wallet, balance))
+  }
+
+  def deleteCustomer(customer: Customer) = {
+    Future.value(deleteCust(customer))
+  }
+
+  def transfer(currency: String, debitAccId: Long, creditAccId: Long, amount: BigDecimal) = {
+    if (amount <= BigDecimal("0.00"))
       throw new TransferException("Transfer Amount can be less than or equal to 0")
-    Future.value(transferMoney(currency,debitAccId,creditAccId,amount))
-	}
+    Future.value(transferMoney(currency, debitAccId, creditAccId, amount))
+  }
 
 
 }
