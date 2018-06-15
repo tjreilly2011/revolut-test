@@ -387,7 +387,7 @@ curl -v localhost:8081/wallet/3
 	Do transfer:
 
 	curl --request PATCH localhost:8081/transfer/debit/1/credit/3?amount=20
-	
+
 ```log
 [
    {
