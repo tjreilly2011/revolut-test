@@ -68,7 +68,7 @@ Closing DB connection
 * wallet table stores customer wallet info
 * wallet_trans table stores information about transactions
 
-REST API URLS:
+# REST API URLS:
 
 Base app url is http://localhost:8081
 
