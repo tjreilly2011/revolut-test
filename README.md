@@ -72,7 +72,7 @@ Closing DB connection
 
 Base app url is http://localhost:8081
 
-all customers:
+All customers:
 
 	curl -v localhost:8081/customers
 
@@ -101,7 +101,8 @@ all customers:
 }
 ]
 ```
-all wallets
+
+All wallets:
 
 	curl -v localhost:8081/wallets
 
@@ -137,7 +138,8 @@ all wallets
 }
 ]
 ```
-all transactions
+
+All transactions:
 
 	curl -v localhost:8081/transactions
 ```log
@@ -172,9 +174,11 @@ all transactions
 }
 ]
 ```
-single customer
+
+Single customer:
 
 	curl -v localhost:8081/customer/1
+
 ```log
 {
 "id": 1,
@@ -184,9 +188,11 @@ single customer
 "noOfAccounts": 2
 }
 ```
-single wallet
+
+Single wallet:
 
 	curl -v localhost:8081/wallet/1
+
 ```log
 {
 "id": 1,
@@ -196,9 +202,11 @@ single wallet
 "balance": 100
 }
 ```
-single wallet tx
+
+Single wallet transaction:
 
 	curl -v localhost:8081/transaction/1
+
 ```log
 {
 "id": 1,
@@ -209,9 +217,10 @@ single wallet tx
 }
 ```
 
-single customer wallet
+Single customer wallet:
 
 	curl -v localhost:8081/customer/1/wallet/1
+
 ```log
 [
 [
@@ -232,9 +241,11 @@ single customer wallet
 ]
 ]
 ```
-single customer wallet transaction
+
+Single customer wallet transaction:
 
 	curl -v localhost:8081/customer/1/wallet/1/transaction/1
+
 ```log
 [
 [
@@ -263,8 +274,10 @@ single customer wallet transaction
 ]
 ```
 
-all customer wallet transactions
+All customer wallet transactions:
+
 	curl -v localhost:8081/customer/1/wallet/1/transactions
+
 ```log
 [
 [
@@ -361,6 +374,7 @@ all customer wallet transactions
 ]
 ]
 ```
+
 # Transfer between wallets
 
 Example to debit £20 from wallet id=1 and credit wallet id = 3
