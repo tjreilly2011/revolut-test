@@ -13,7 +13,7 @@ Used following libs etc for this project:
 Build instructions:
 * Install Scala version 2.11.12
 * Install Sbt version 0.13.17
-* Clone|Download zip of the project to local machine from github https://github.com/tjreilly2011/revolut-test
+* Clone or Download a zip of the project to your local machine
 * cd to the project main directory revolut-test
 * sbt clean test run
 ```log
@@ -59,14 +59,14 @@ Build instructions:
 Closing DB connection
 ```
 
-# Model
+# DB Model
 
-1 Customer can have many wallets
-1 Wallet can have many Wallet transactions
+* A Customer can have many wallets
+* A wallet can have many Wallet transactions
 
-* customer table stores customer info
-* wallet table stores customer wallet info
-* wallet_trans table stores information about transactions
+* The customer table stores customer info
+* The wallet table stores customer wallet info
+* The wallet_trans table stores information about transactions
 
 # REST API URLS:
 
