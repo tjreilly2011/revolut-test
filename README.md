@@ -62,7 +62,7 @@ Closing DB connection
 # DB Model
 
 * A Customer can have many wallets
-* A wallet can have many Wallet transactions
+* A wallet can have many wallet transactions
 
 * The customer table stores customer info
 * The wallet table stores customer wallet info
